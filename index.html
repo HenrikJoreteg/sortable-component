@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <style>
+      body {
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+        font-weight: 300;
+        color: gray;
+      }
+
+      sortable-list {
+        width: 200px;
+        display: block;
+      }
+
+      .item {
+        transition: transform 300ms;
+        background: white;
+      }
+
+      .item.holding {
+        transition: none;
+        z-index: 10;
+      }
+
+      .item.holding div {
+        transform: scale(1.05);
+      }
+
+      .item div {
+        margin-bottom: 5px;
+        border: 2px solid lightgray;
+        padding: 5px;
+        border-radius: 5px;
+        transition: transform 300ms;
+      }
+    </style>
+  </head>
+  <body>  
+    <h1>Webcomponents Polyfill Error test case</h1>
+    <p>This is a simple web component to adds drag and drop sorting capabilities to its children once connected</p> 
+    <p>Click and hold for 300ms to initiate "holding" then drag to make child elements move. It's mostly working in Chrome/Safari but for some reason when using the polyfill in FF accessing `event.target` throws a `TypeError` in the console saying `a is null`.</p>
+    <sortable-list>
+      <div class='item' id='el1'><div>Item 1</div></div>
+      <div class='item' id='el2'><div>Item 2</div></div>
+      <div class='item' id='el3'><div>Item 3</div></div>
+      <div class='item' id='el4'><div>Item 4</div></div>
+    </sortable-list>
+    <script src='sortable-list.js'></script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "sortable-list",
+  "version": "1.0.0",
+  "main": "sortable-list.js",
+  "scripts": {
+    "deploy": "surge -p . -d sortable-component.surge.sh/"
+  },
+  "author": "Henrik Joreteg <henrik@joreteg.com> (joreteg.com)",
+  "license": "MIT"
+}
