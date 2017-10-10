@@ -53,6 +53,8 @@ const run = () => {
     _onMove (e) {
       if (!this._down) return
       if (this._draggedElement) {
+        e.preventDefault()
+        e.stopPropagation()
         const yDelta = -this._getDelta(e, 'y')
         this._draggedElement.style.transform = `translateY(${yDelta}px)`
         this._reEvaluatePositions(yDelta)
@@ -93,13 +95,15 @@ const run = () => {
     }
   
     _onStart (e) {
+      const { target } = e
+      target.style.userSelect = 'none'
       this._down = true
       this.startX = this._getPagePosition(e, 'x')
       this.startY = this._getPagePosition(e, 'y')
       if (this._timer) clearTimeout(this._timer)
       this._timer = setTimeout(() => {
-        console.log('HOLDING', e.target)
-        this._draggedElement = this._getTopChildFromTarget(e.target)
+        console.log('HOLDING')
+        this._draggedElement = this._getTopChildFromTarget(target)
         const children = this._getChildren()
         if (children.length > 1) {
           this._draggedHeight = children[1].offsetTop - children[0].offsetTop
@@ -174,11 +178,13 @@ const run = () => {
       }
     }
   
-    _onClick () {
+    _onClick (e) {
       console.log('on click')
       if (!this._draggedElement || !this._orderedChanged) {
         this._reset()
       } else {
+        e.preventDefault()
+        e.stopPropagation()
         this._onSorted()
       }
     }

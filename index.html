@@ -36,9 +36,6 @@
     </style>
   </head>
   <body>  
-    <h1>Webcomponents Polyfill Error test case</h1>
-    <p>This is a simple web component to adds drag and drop sorting capabilities to its children once connected</p> 
-    <p>Click and hold for 300ms to initiate "holding" then drag to make child elements move. It's mostly working in Chrome/Safari but for some reason when using the polyfill in FF accessing `event.target` throws a `TypeError` in the console saying `a is null`.</p>
     <sortable-list>
       <div class='item' id='el1'><div>Item 1</div></div>
       <div class='item' id='el2'><div>Item 2</div></div>
@@ -46,5 +43,11 @@
       <div class='item' id='el4'><div>Item 4</div></div>
     </sortable-list>
     <script src='sortable-list.js'></script>
+    <script>
+      const el = document.querySelector('sortable-list')
+      el.addEventListener('sorted', e => {
+        console.log('sorted:', e.data)
+      })
+    </script>
   </body>
 </html>
